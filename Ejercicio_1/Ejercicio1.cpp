@@ -1,9 +1,6 @@
 
-#include <iostream>
-#include <vector>   
-using namespace std;
+#include "Ejercicio1.h"
 
-// Genera una matriz cuadrada de tamaño n x n con valores consecutivos
 vector<vector<int>> generar_matriz(int n) {
     if (n <= 1) {
         cerr << "Error: n debe ser mayor que 1." << endl;

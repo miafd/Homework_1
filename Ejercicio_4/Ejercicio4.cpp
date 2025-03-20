@@ -1,11 +1,7 @@
-#include <iostream>
-#include <string>
-#include <chrono>
-
-using namespace std;
+#include "Ejercicio4.h"
 
 // Función recursiva usando string
-bool comparar_recursivo(const string& str1, const string& str2, size_t index = 0) {
+bool comparar_recursivo(const string& str1, const string& str2, size_t index) {
     // Caso base: Si llegamos al final de ambas cadenas, son iguales
     if (index == str1.size() && index == str2.size()) {
         return true;
@@ -19,7 +15,7 @@ bool comparar_recursivo(const string& str1, const string& str2, size_t index = 0
 }
 
 //Función recursiva usando *char
-bool comparar_recursivo_2(const char* str1, const char* str2, size_t index = 0) {
+bool comparar_recursivo_2(const char* str1, const char* str2, size_t index) {
     // Caso base: Si llegamos al final de ambas cadenas, son iguales
     if (str1[index] == '\0' && str2[index] == '\0') {
         return true;
@@ -29,14 +25,14 @@ bool comparar_recursivo_2(const char* str1, const char* str2, size_t index = 0) 
         return false;
     }
     // Llamada recursiva para comparar el siguiente carácter
-    return comparar_recursivo(str1, str2, index + 1);
+    return comparar_recursivo_2(str1, str2, index + 1);
 }
 
 // Función recursiva en tiempo de compilación
-constexpr bool comparar_recursivo(const char* str1, const char* str2, size_t index = 0) {
+constexpr bool comparar_recursivo_3(const char* str1, const char* str2, size_t index) {
     return (str1[index] == '\0' && str2[index] == '\0') ? true :
            (str1[index] != str2[index]) ? false :
-           comparar_recursivo(str1, str2, index + 1);
+           comparar_recursivo_3(str1, str2, index + 1);
 }
 
 
@@ -45,10 +41,10 @@ int main() {
     // Definición de textos de prueba
     string text1 = "Este es un ejemplo con un texto de al menos 64 caracteres...";
     string text2 = "Este es un ejemplo con un texto de al menos 64 caracteres...";
-    string text3 = "Texto distinto para comprobar la funcionalidad.";
+    string text3 = "Texto diferente para verificar su funcionalidad correctamente.";
     const char* text1_1 = "Este es un ejemplo con un texto de al menos 64 caracteres...";
     const char* text2_1 = "Este es un ejemplo con un texto de al menos 64 caracteres...";
-    const char* text3_1 = "Texto distinto para comprobar la funcionalidad.";
+    const char* text3_1 = "Texto diferente para verificar su funcionalidad correctamente.";
 
     // Comparaciones usando string
     cout << "=== Comparaciones usando string ===" << endl;
@@ -80,17 +76,17 @@ int main() {
     cout << "\n=== Comparaciones en Tiempo de Compilación ===" << endl;
     constexpr const char* text4 = "Este es un ejemplo con un texto de al menos 64 caracteres...";
     constexpr const char* text5 = "Este es un ejemplo con un texto de al menos 64 caracteres...";
-    constexpr const char* text6 = "Texto distinto para comprobar la funcionalidad.";
+    constexpr const char* text6 = "Texto diferente para verificar su funcionalidad correctamente.";
 
-    constexpr bool result3 = comparar_recursivo(text4, text5);
-    constexpr bool result4 = comparar_recursivo(text4, text6);
+    constexpr bool result3 = comparar_recursivo_3(text4, text5);
+    constexpr bool result4 = comparar_recursivo_3(text4, text6);
 
     cout << "Comparación 5 (text4 vs text5): " << boolalpha << result3 << endl; // true
     cout << "Comparación 6 (text4 vs text6): " << boolalpha << result4 << endl; // false
 
 
     auto startTime3 = chrono::high_resolution_clock::now();
-    constexpr bool result5 = comparar_recursivo(text4, text5);
+    constexpr bool result5 = comparar_recursivo_3(text4, text5);
     auto endTime3 = chrono::high_resolution_clock::now();
     auto elapsedTime3 = chrono::duration_cast<chrono::nanoseconds>(endTime3 - startTime3);
 

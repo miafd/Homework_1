@@ -1,10 +1,19 @@
 Justificaciones del ejercicio 4
 
-Para el ejercicio 4a opté por implementar una función utilizando string y otra utilizando char*. 
-Probé ambas funciones en el main comparando los mismos textos, utilizando el componente high_resolution_clock de <chrono>
-como se indica en el inciso b. Al ejecutar el código, si bien los tiempos van variando todas las veces, se mantiene constante 
-que el tiempo de ejecución de la función que utiliza string es menor. Por lo tanto, mi elección sería usar string debido a la diferencia,
-por minima que sea, en el tiempo de ejecución. 
+Para el ejercicio 4a, opté por implementar una función utilizando std::string y otra utilizando const char*.
+Probé ambas funciones en el main comparando los mismos textos, midiendo el tiempo con high_resolution_clock de <chrono>, 
+como se indica en el inciso b. Para elegir entre std::string y const char*, ejecuté el código varias veces y tomé un promedio de los tiempos. 
+En general, la función con const char* mostró un menor tiempo de ejecución, lo que sugiere que acceder a los caracteres directamente con punteros 
+puede ser más eficiente en este caso. 
+Sin embargo, es importante notar que estos tiempos pueden variar según la carga de la máquina en el momento de la ejecución.
+En este caso específico, dado que la diferencia de tiempo es notable, mi elección sería const char*. Sin embargo, 
+para aplicaciones más complejas, std::string podría ser una mejor opción debido a sus características de seguridad 
+y facilidad de uso.
 
-Cuando medimos el tiempo de ejecución de la comparación en tiempo de compilación (inciso c), nos damos cuenta que esta es mucho menor que las anteriores. 
-En este caso, no hay comparación real en tiempo de ejecución, lo que reduce el tiempo prácticamente a cero. 
+Cuando medimos el tiempo de ejecución de la comparación en tiempo de compilación (inciso c), notamos que esta es mucho 
+menor que las anteriores (prácticamente cero). Esto se debe a que la comparación se realiza durante la compilación mediante constexpr, lo que significa 
+que el compilador ya sabe el resultado antes de ejecutar el programa. 
+Como consecuencia, en tiempo de ejecución no se ejecuta ninguna comparación real, ya que el valor precomputado se reemplaza directamente en el código generado.
+
+
+

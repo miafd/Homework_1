@@ -1,20 +1,5 @@
 
-#include <iostream>              // Entrada/salida estándar
-#include <fstream>               // Manejo de archivos
-#include <string>                // Manejo de cadenas de texto
-#include <cstdlib>               // Maneja exit() en caso de errores
-
-using namespace std;           
-
-// Enumeración para definir niveles de severidad
-enum NivelSeveridad {
-    DEBUG,
-    INFO,
-    WARNING,
-    ERROR,
-    CRITICAL,
-    SECURITY                     
-};
+#include "Ejercicio2.h"
 
 // Función logMessage punto a
 void logMessage(const string& mensaje, NivelSeveridad nivel) {
