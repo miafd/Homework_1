@@ -18,6 +18,20 @@ bool comparar_recursivo(const string& str1, const string& str2, size_t index = 0
     return comparar_recursivo(str1, str2, index + 1);
 }
 
+//Función recursiva usando *char
+bool comparar_recursivo_2(const char* str1, const char* str2, size_t index = 0) {
+    // Caso base: Si llegamos al final de ambas cadenas, son iguales
+    if (str1[index] == '\0' && str2[index] == '\0') {
+        return true;
+    }
+    // Caso base: Si los caracteres en la posición actual no coinciden
+    if (str1[index] != str2[index]) {
+        return false;
+    }
+    // Llamada recursiva para comparar el siguiente carácter
+    return comparar_recursivo(str1, str2, index + 1);
+}
+
 // Función recursiva en tiempo de compilación
 constexpr bool comparar_recursivo(const char* str1, const char* str2, size_t index = 0) {
     return (str1[index] == '\0' && str2[index] == '\0') ? true :

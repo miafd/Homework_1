@@ -110,56 +110,51 @@ void erase(ListaEnlazada &lista, size_t index) {
 }
 
 //Función para imprimir la lista 
-void print_list(){
-    return;
+void print_list (ListaEnlazada &lista) {
+    cout << "Lista resultante: ";
+    unique_ptr<Nodo>* actual = &lista.cabeza;
+    while (*actual) {
+        cout << (*actual)->valor << " -> ";
+        actual = &((*actual)->siguiente);
+    }
+    cout << "nullptr" << endl; // Indicar el final de la lista
 }
 
 
-//Main provisosrio para ir probando las funciones (tiene raw pointers)
-int main() {
+int main(){
     ListaEnlazada lista;
 
     // Insertar elementos en la lista
+    cout << "=== Insertando elementos en la lista ===" << endl;
+
     cout << "Insertando 10 al frente." << endl;
-    insert(lista, 10, 0);
-    
+    push_front(lista,10); 
+
     cout << "Insertando 20 al frente." << endl;
-    insert(lista, 20, 0);
-    
-    cout << "Insertando 30 en la posición 1." << endl;
-    insert(lista, 30, 1);
-    
-    cout << "Insertando 40 al final (posición 3)." << endl;
-    insert(lista, 40, 3);
-    
+    push_front(lista,20); 
+
+    cout << "Insertando 30 al final." << endl;
+    push_back(lista,30); 
+
+    cout << "Insertando 40 en la posición 1." << endl;
+    insert(lista,40,1); 
+
     cout << "Insertando 50 en una posición fuera de rango (índice 10)." << endl;
-    insert(lista, 50, 10);
+    insert(lista,50,10); 
 
-    cout << "Insertando 60 al final." << endl;
-    push_back(lista, 60);
+    cout << "=== Imprimo la lista luego de las inserciones ===" << endl;
+    print_list(lista); 
 
-    // Imprimir la lista
-    cout << "Lista resultante: ";
-    Nodo* actual = lista.cabeza.get();
-    while (actual) {
-        cout << actual->valor << " -> ";
-        actual = actual->siguiente.get();
-    }
-    cout << "nullptr" << endl;
+    cout << "=== Borrando elementos de la lista ===" << endl;
 
     cout << "Borrando el 10 (posición 2)" << endl;
-    erase(lista, 2);
+    erase(lista,2); 
 
     cout << "Borrando un elemento fuera de rango (índice 10)" << endl;
-    erase(lista, 10);
+    erase(lista,10); 
 
-      // Imprimir la lista
-    cout << "Lista resultante: ";
-    Nodo* actual2 = lista.cabeza.get();
-    while (actual2) {
-        cout << actual2->valor << " -> ";
-        actual2 = actual2->siguiente.get();
-    }
+    cout << "=== Imprimo la lista luego de las eliminaciones ===" << endl;
+    print_list(lista);
 
     return 0;
 }
