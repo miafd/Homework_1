@@ -18,7 +18,7 @@ struct ListaEnlazada {
 // Función para crear un nodo
 unique_ptr<Nodo> create_nodo(int valor) {
     unique_ptr<Nodo> nodo = make_unique<Nodo>();
-    nodo->valor = valor; //No se si es necesario 
+    nodo->valor = valor;
     return nodo;
 }
 

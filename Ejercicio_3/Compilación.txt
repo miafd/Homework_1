@@ -1,1 +1,4 @@
+Para compilar el ejercicio 3
 
+g++ Ejercicio.cpp -o ej3
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./ej3

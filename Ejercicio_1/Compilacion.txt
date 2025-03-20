@@ -1,1 +1,4 @@
+Para compilar el ejercicio 1
 
+g++ Ejercicio1.cpp -o ej1 
+./ej1
