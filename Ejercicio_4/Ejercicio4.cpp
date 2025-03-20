@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// Función recursiva para comparar dos cadenas
+// Función recursiva usando string
 bool comparar_recursivo(const string& str1, const string& str2, size_t index = 0) {
     // Caso base: Si llegamos al final de ambas cadenas, son iguales
     if (index == str1.size() && index == str2.size()) {
@@ -46,45 +46,56 @@ int main() {
     string text1 = "Este es un ejemplo con un texto de al menos 64 caracteres...";
     string text2 = "Este es un ejemplo con un texto de al menos 64 caracteres...";
     string text3 = "Texto distinto para comprobar la funcionalidad.";
-    string text4 = "La imaginación nos permite explorar mundos desconocidos, crear nuevas ideas y soñaar sin limites";
-    string text5 = "Este es un ejemplo con un texto de al menos 64 caracteres...Este es un ejemplo con un texto de al menos 64 caracteres...";
-    string text6 = "Este es un ejemplo con un texto de al menos 64 caracteres...Este es un ejemplo con un texto de al menos 64 caracteres...";
+    const char* text1_1 = "Este es un ejemplo con un texto de al menos 64 caracteres...";
+    const char* text2_1 = "Este es un ejemplo con un texto de al menos 64 caracteres...";
+    const char* text3_1 = "Texto distinto para comprobar la funcionalidad.";
 
-    // Comparaciones directas
-    cout << "=== Comparaciones Directas ===" << endl;
+    // Comparaciones usando string
+    cout << "=== Comparaciones usando string ===" << endl;
     cout << "Comparación 1 (text1 vs text2): " << boolalpha << comparar_recursivo(text1, text2) << endl;
     cout << "Comparación 2 (text1 vs text3): " << boolalpha << comparar_recursivo(text1, text3) << endl;
-    
-    // Medición de tiempo para comparaciones largas
-    cout << "\n=== Medición de Tiempo ===" << endl;
 
+    // Medición de tiempo para string
     auto startTime1 = chrono::high_resolution_clock::now();
-    bool result1 = comparar_recursivo(text1, text4);
+    bool result1 = comparar_recursivo(text1, text2);
     auto endTime1 = chrono::high_resolution_clock::now();
     auto elapsedTime1 = chrono::duration_cast<chrono::nanoseconds>(endTime1 - startTime1);
 
-    cout << "Comparación 3 (text1 vs text4): " << boolalpha << result1 << endl;
-    cout << "Tiempo de ejecución: " << elapsedTime1.count() << " nanosegundos" << endl;
+    cout << "Tiempo de ejecución (string): " << elapsedTime1.count() << " nanosegundos (text1 vs text2)" << endl;
 
+    // Comparaciones usando char*
+    cout << "\n=== Comparaciones usando char* ===" << endl;
+    cout << "Comparación 3 (text1_1 vs text2_1): " << boolalpha << comparar_recursivo_2(text1_1, text2_1) << endl;
+    cout << "Comparación 4 (text1_1 vs text3_1): " << boolalpha << comparar_recursivo_2(text1_1, text3_1) << endl;
+
+    // Medición de tiempo para char*
     auto startTime2 = chrono::high_resolution_clock::now();
-    bool result2 = comparar_recursivo(text5, text6);
+    bool result2 = comparar_recursivo_2(text1_1, text2_1);
     auto endTime2 = chrono::high_resolution_clock::now();
     auto elapsedTime2 = chrono::duration_cast<chrono::nanoseconds>(endTime2 - startTime2);
 
-    cout << "Comparación 4 (text5 vs text6): " << boolalpha << result2 << endl;
-    cout << "Tiempo de ejecución: " << elapsedTime2.count() << " nanosegundos" << endl;
+    cout << "Tiempo de ejecución (char*): " << elapsedTime2.count() << " nanosegundos (text1_1 vs text2_1)" << endl;
 
-    // Prueba de la función en tiempo de compilación
+    // Comparaciones en tiempo de compilación
     cout << "\n=== Comparaciones en Tiempo de Compilación ===" << endl;
-    constexpr const char* text7 = "Este es un ejemplo con un texto de al menos 64 caracteres...";
-    constexpr const char* text8 = "Este es un ejemplo con un texto de al menos 64 caracteres...";
-    constexpr const char* text9 = "Texto distinto para comprobar la funcionalidad.";
+    constexpr const char* text4 = "Este es un ejemplo con un texto de al menos 64 caracteres...";
+    constexpr const char* text5 = "Este es un ejemplo con un texto de al menos 64 caracteres...";
+    constexpr const char* text6 = "Texto distinto para comprobar la funcionalidad.";
 
-    constexpr bool result3 = comparar_recursivo(text7, text8);
-    constexpr bool result4 = comparar_recursivo(text7, text9);
+    constexpr bool result3 = comparar_recursivo(text4, text5);
+    constexpr bool result4 = comparar_recursivo(text4, text6);
 
-    cout << "Comparación 5 (text7 vs text8): " << boolalpha << result3 << endl; //true
-    cout << "Comparación 6 (text7 vs text9): " << boolalpha << result4 << endl; //False
+    cout << "Comparación 5 (text4 vs text5): " << boolalpha << result3 << endl; // true
+    cout << "Comparación 6 (text4 vs text6): " << boolalpha << result4 << endl; // false
 
+
+    auto startTime3 = chrono::high_resolution_clock::now();
+    constexpr bool result5 = comparar_recursivo(text4, text5);
+    auto endTime3 = chrono::high_resolution_clock::now();
+    auto elapsedTime3 = chrono::duration_cast<chrono::nanoseconds>(endTime3 - startTime3);
+
+    cout << "Tiempo de ejecución: " << elapsedTime3.count() << " nanosegundos" << endl;
+    
     return 0;
 }
+

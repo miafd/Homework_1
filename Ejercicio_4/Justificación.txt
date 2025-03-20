@@ -1,0 +1,10 @@
+Justificaciones del ejercicio 4
+
+Para el ejercicio 4a opté por implementar una función utilizando string y otra utilizando char*. 
+Probé ambas funciones en el main comparando los mismos textos, utilizando el componente high_resolution_clock de <chrono>
+como se indica en el inciso b. Al ejecutar el código, si bien los tiempos van variando todas las veces, se mantiene constante 
+que el tiempo de ejecución de la función que utiliza string es menor. Por lo tanto, mi elección sería usar string debido a la diferencia,
+por minima que sea, en el tiempo de ejecución. 
+
+Cuando medimos el tiempo de ejecución de la comparación en tiempo de compilación (inciso c), nos damos cuenta que esta es mucho menor que las anteriores. 
+En este caso, no hay comparación real en tiempo de ejecución, lo que reduce el tiempo prácticamente a cero. 
